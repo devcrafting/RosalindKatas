@@ -21,3 +21,10 @@ let ``Given a sequence with unknown nucleotides, when reverse, then return rever
     let sequence = "ATUGACRE".ToCharArray() |> Array.toList
     let filtered = filterSequence reverse List.Empty sequence ' ' 0
     filtered |> System.String.Concat |> should equal "CAGTA"
+    
+[<Fact>]
+let ``Given a sequence, when count GA, then return number of GA occurences`` () =
+    let sequence = "ATGAC".ToCharArray() |> Array.toList
+    let filtered = filterSequence countGA List.Empty sequence ' ' 0
+    filtered |> System.String.Concat |> should equal "1"
+    
