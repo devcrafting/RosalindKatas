@@ -69,3 +69,12 @@ let ``Given a sequence, when insert ATG at position 3, then return sequence with
     match filtered with
     | Insert inputOutput -> inputOutput.Output |> System.String.Concat |> should equal "ATGATGAC"
     
+[<Fact>]
+let ``Given a sequence, when complete, then return original (filtered) and its completion`` () =
+    let sequence = "ATUGACRE".ToCharArray() |> Array.toList
+    let inputOutput = Complete { Input = sequence; Output = (Seq.empty, Seq.empty) }
+    let filtered = filterSequence' inputOutput sequence
+    match filtered with
+    | Complete inputOutput -> 
+        fst inputOutput.Output |> System.String.Concat |> should equal "ATGAC"
+        snd inputOutput.Output |> System.String.Concat |> should equal "TACTG"
