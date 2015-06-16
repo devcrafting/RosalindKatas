@@ -7,7 +7,7 @@ type InputOutput =
     | Nothing of Nothing
     | Reverse of Reverse
     | Count of Count
-    | Insert
+    | Insert of Insert
     | Complete
 and Nothing = {
     Input: char seq;
@@ -21,6 +21,12 @@ and Count = {
     Input: char seq;
     Pattern: char seq;
     Output: char seq * int
+}
+and Insert = {
+    Input: char seq;
+    Insertion: char seq;
+    Position: int;
+    Output: char seq
 }
     
 
@@ -58,6 +64,13 @@ let insertGA4 (filtered: char seq) item previousItem position =
     if position = 4
     then Seq.append filtered ['G'; 'A'; item ]
     else nothing filtered item previousItem position
+    
+let insert (insertion: char seq) position (previousResult: char seq) item =
+    if position = (previousResult |> Seq.length)
+    then
+        let newItems = nothing' insertion item
+        Seq.append previousResult newItems
+    else nothing' previousResult item
 
 let complete (filtered: char seq) item previousItem position =
     let completion = 
@@ -79,6 +92,8 @@ let rec filterSequence' inputOutput sequence =
             filterSequence' (Reverse { inputOutput with Output = reverse' inputOutput.Output head }) tail
         | Count inputOutput ->
             filterSequence' (Count { inputOutput with Output = count inputOutput.Pattern inputOutput.Output head }) tail
+        | Insert inputOutput ->
+            filterSequence' (Insert { inputOutput with Output = insert inputOutput.Insertion inputOutput.Position inputOutput.Output head }) tail
     | _::tail -> filterSequence' inputOutput tail
     | [] -> inputOutput
 
