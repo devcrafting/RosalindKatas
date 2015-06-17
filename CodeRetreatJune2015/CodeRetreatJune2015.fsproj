@@ -68,6 +68,8 @@
     <None Include="packages.config" />
     <Compile Include="Library.fs" />
     <Compile Include="Tests.fs" />
+    <Compile Include="ReadWriteFile.fs" />
+    <Compile Include="ReadWriteTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <PropertyGroup>
