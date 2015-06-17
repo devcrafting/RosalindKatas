@@ -66,3 +66,13 @@ let ``Given input with Insert instruction with insertion CT at position 2, when 
         inputOutput.Insertion |> should equal [|'C';'T'|]
         inputOutput.Position |> should equal 2
         inputOutput.Output |> Seq.length |> should equal 0
+         
+[<Fact>]
+let ``Given input with Complete instruction, when read input, then return Complete InputOutput`` () =
+    let input = [|"complete";"ACGTC"|]
+    let inputOutput = readInput input
+    match inputOutput with
+    | Complete inputOutput -> 
+        inputOutput.Input |> should equal input.[1]
+        fst inputOutput.Output |> Seq.length |> should equal 0
+        snd inputOutput.Output |> Seq.length |> should equal 0

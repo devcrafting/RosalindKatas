@@ -17,5 +17,5 @@ let readInput (fileContent: string array) =
             | "reverse" -> Reverse { Input = input; Output = List.Empty }
             | Instruction "count" parameters -> Count { Input = input; Pattern = parameters.[0].ToCharArray(); Output = (Seq.empty, 0) }
             | Instruction "insert" parameters -> Insert { Input = input; Insertion = parameters.[0].ToCharArray(); Position = int parameters.[1]; Output = List.Empty }
-            //| "complete" -> Complete { Input = input; Output = (Seq.empty, Seq.empty) }
+            | "complete" -> Complete { Input = input; Output = (Seq.empty, Seq.empty) }
             | _ -> Nothing { Input = input; Output = List.Empty }
