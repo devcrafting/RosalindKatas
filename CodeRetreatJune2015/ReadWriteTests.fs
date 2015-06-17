@@ -8,7 +8,7 @@ open NDA
 [<Fact>]
 let ``Given input without instruction, when read input, then return Nothing InputOutput`` () =
     let input = [|"ACGTC"|]
-    let inputOutput = readInput input
+    let inputOutput, sequence = readInput input
     match inputOutput with
     | Nothing inputOutput -> 
         inputOutput.Input |> should equal input.[0]
@@ -17,7 +17,7 @@ let ``Given input without instruction, when read input, then return Nothing Inpu
 [<Fact>]
 let ``Given input with Reverse instruction, when read input, then return Reverse InputOutput`` () =
     let input = [|"reverse";"ACGTC"|]
-    let inputOutput = readInput input
+    let inputOutput, sequence = readInput input
     match inputOutput with
     | Reverse inputOutput -> 
         inputOutput.Input |> should equal input.[1]
@@ -26,7 +26,7 @@ let ``Given input with Reverse instruction, when read input, then return Reverse
 [<Fact>]
 let ``Given input with Count instruction with pattern GA, when read input, then return Count InputOutput`` () =
     let input = [|"count GA";"ACGTC"|]
-    let inputOutput = readInput input
+    let inputOutput, sequence = readInput input
     match inputOutput with
     | Count inputOutput -> 
         inputOutput.Input |> should equal input.[1]
@@ -37,7 +37,7 @@ let ``Given input with Count instruction with pattern GA, when read input, then 
 [<Fact>]
 let ``Given input with Count instruction with pattern TC, when read input, then return Count InputOutput`` () =
     let input = [|"count TC";"ACGTC"|]
-    let inputOutput = readInput input
+    let inputOutput, sequence = readInput input
     match inputOutput with
     | Count inputOutput -> 
         inputOutput.Input |> should equal input.[1]
@@ -48,7 +48,7 @@ let ``Given input with Count instruction with pattern TC, when read input, then 
 [<Fact>]
 let ``Given input with Insert instruction with insertion AG at position 4, when read input, then return Insert InputOutput`` () =
     let input = [|"insert GA 4";"ACGTC"|]
-    let inputOutput = readInput input
+    let inputOutput, sequence = readInput input
     match inputOutput with
     | Insert inputOutput -> 
         inputOutput.Input |> should equal input.[1]
@@ -59,7 +59,7 @@ let ``Given input with Insert instruction with insertion AG at position 4, when 
 [<Fact>]
 let ``Given input with Insert instruction with insertion CT at position 2, when read input, then return Insert InputOutput`` () =
     let input = [|"insert CT 2";"ACGTC"|]
-    let inputOutput = readInput input
+    let inputOutput, sequence = readInput input
     match inputOutput with
     | Insert inputOutput -> 
         inputOutput.Input |> should equal input.[1]
@@ -70,7 +70,7 @@ let ``Given input with Insert instruction with insertion CT at position 2, when 
 [<Fact>]
 let ``Given input with Complete instruction, when read input, then return Complete InputOutput`` () =
     let input = [|"complete";"ACGTC"|]
-    let inputOutput = readInput input
+    let inputOutput, sequence = readInput input
     match inputOutput with
     | Complete inputOutput -> 
         inputOutput.Input |> should equal input.[1]
