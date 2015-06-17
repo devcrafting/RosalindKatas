@@ -18,3 +18,11 @@ let readInput (fileContent: string array) =
         | "complete" -> Complete { Input = input; Output = (Seq.empty, Seq.empty) }
         | _ -> Nothing { Input = input; Output = List.Empty }
     inputOutput, input
+
+let writeOutput inputOutput =
+    match inputOutput with
+    | Nothing inputOutput -> [inputOutput.Output |> System.String.Concat ]
+    | Reverse inputOutput -> [inputOutput.Output |> System.String.Concat ]
+    | Count inputOutput -> [string (snd inputOutput.Output)]
+    | Insert inputOutput -> [inputOutput.Output |> System.String.Concat ]
+    | Complete inputOutput -> [inputOutput.Output |> fst |> System.String.Concat; inputOutput.Output |> snd |> System.String.Concat]
