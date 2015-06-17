@@ -30,6 +30,17 @@ let ``Given input with Count instruction with pattern GA, when read input, then 
     match inputOutput with
     | Count inputOutput -> 
         inputOutput.Input |> should equal input.[1]
-        inputOutput.Pattern |> should equal ['G';'A']
+        inputOutput.Pattern |> should equal [|'G';'A'|]
+        fst inputOutput.Output |> Seq.length |> should equal 0
+        snd inputOutput.Output |> should equal 0
+        
+[<Fact>]
+let ``Given input with Count instruction with pattern TC, when read input, then return Count InputOutput`` () =
+    let input = [|"count TC";"ACGTC"|]
+    let inputOutput = readInput input
+    match inputOutput with
+    | Count inputOutput -> 
+        inputOutput.Input |> should equal input.[1]
+        inputOutput.Pattern |> should equal [|'T';'C'|]
         fst inputOutput.Output |> Seq.length |> should equal 0
         snd inputOutput.Output |> should equal 0
