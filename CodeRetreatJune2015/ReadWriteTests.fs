@@ -44,3 +44,25 @@ let ``Given input with Count instruction with pattern TC, when read input, then 
         inputOutput.Pattern |> should equal [|'T';'C'|]
         fst inputOutput.Output |> Seq.length |> should equal 0
         snd inputOutput.Output |> should equal 0
+        
+[<Fact>]
+let ``Given input with Insert instruction with insertion AG at position 4, when read input, then return Insert InputOutput`` () =
+    let input = [|"insert GA 4";"ACGTC"|]
+    let inputOutput = readInput input
+    match inputOutput with
+    | Insert inputOutput -> 
+        inputOutput.Input |> should equal input.[1]
+        inputOutput.Insertion |> should equal [|'G';'A'|]
+        inputOutput.Position |> should equal 4
+        inputOutput.Output |> Seq.length |> should equal 0
+             
+[<Fact>]
+let ``Given input with Insert instruction with insertion CT at position 2, when read input, then return Insert InputOutput`` () =
+    let input = [|"insert CT 2";"ACGTC"|]
+    let inputOutput = readInput input
+    match inputOutput with
+    | Insert inputOutput -> 
+        inputOutput.Input |> should equal input.[1]
+        inputOutput.Insertion |> should equal [|'C';'T'|]
+        inputOutput.Position |> should equal 2
+        inputOutput.Output |> Seq.length |> should equal 0
